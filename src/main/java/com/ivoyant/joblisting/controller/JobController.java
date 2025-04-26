@@ -1,6 +1,7 @@
 package com.ivoyant.joblisting.controller;
 
 import com.ivoyant.joblisting.entity.Job;
+//import com.ivoyant.joblisting.service.CacheInspectionService;
 import com.ivoyant.joblisting.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
+//    @Autowired
+//    private CacheInspectionService cacheInspectionService;
+
     @PostMapping
     public Job createJob(@RequestBody Job job) {
         return jobService.createJob(job);
@@ -26,17 +30,22 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Job> getJobById(@PathVariable String id) {
+    public Optional<Job> getJobById(@PathVariable long id) {
         return jobService.getJobById(id);
     }
 
+//    @GetMapping("/cacheData")
+//    public void getCacheData(){
+//        cacheInspectionService.printCacheContents("Job");
+//    }
+
     @PutMapping("/{id}")
-    public Job updateJob(@PathVariable String id, @RequestBody Job job) {
+    public Job updateJob(@PathVariable long id, @RequestBody Job job) {
         return jobService.updateJob(id, job);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteJob(@PathVariable String id) {
+    public void deleteJob(@PathVariable long id) {
         jobService.deleteJob(id);
     }
 }
